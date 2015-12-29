@@ -236,6 +236,10 @@ func (p *digitalPin) Close() error {
 		return err
 	}
 
+	if err := p.unexport(); err != nil {
+		return err
+	}
+
 	if !p.initialized {
 		return nil
 	}
@@ -247,9 +251,6 @@ func (p *digitalPin) Close() error {
 		return err
 	}
 	if err := p.activeLow.Close(); err != nil {
-		return err
-	}
-	if err := p.unexport(); err != nil {
 		return err
 	}
 
