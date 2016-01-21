@@ -47,6 +47,9 @@ func (p *digitalPin) init() error {
 	if err = p.export(); err != nil {
 		return err
 	}
+	// give rpi some time to link digital pin property
+	// https://github.com/kidoman/embd/issues/52
+	time.Sleep(100 * time.Millisecond)
 	if p.dir, err = p.directionFile(); err != nil {
 		return err
 	}
